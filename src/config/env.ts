@@ -24,4 +24,4 @@ if (!_env.success) {
 }
 
 // Export the typed config object
-export const config = _env.data;
+export const config = _env.data as z.infer<typeof envSchema>;

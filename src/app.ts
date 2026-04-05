@@ -50,13 +50,14 @@ app.use('/api/records', recordRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
 // Serve Frontend SPA
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(process.cwd(), 'client')));
 
 // Global Error Handler (Must be defined absolutely last in the middleware chain)
 app.use(errorHandler);
 
 // Start HTTP Server
-app.listen(config.PORT, () => {
-    console.log(`🚀 Server is running on http://localhost:${config.PORT}`);
-    console.log(`📖 Swagger UI available at http://localhost:${config.PORT}/api-docs`);
+const PORT = config.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    console.log(`📖 Swagger UI available at http://localhost:${PORT}/api-docs`);
 });

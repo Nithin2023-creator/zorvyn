@@ -1,4 +1,4 @@
-import { Response, NextFunction } from 'express';
+import { Response, NextFunction, Request } from 'express';
 import { RecordService } from '../services/RecordService';
 import { AuthRequest } from '../types';
 
@@ -14,7 +14,7 @@ export class RecordController {
         }
     }
 
-    static async list(req: AuthRequest, res: Response, next: NextFunction) {
+    static async list(req: Request, res: Response, next: NextFunction) {
         try {
             const { records, meta } = await RecordService.list(req.query as any);
             res.status(200).json({ success: true, data: records, meta });
@@ -23,7 +23,7 @@ export class RecordController {
         }
     }
 
-    static async update(req: AuthRequest, res: Response, next: NextFunction) {
+    static async update(req: Request, res: Response, next: NextFunction) {
         try {
             const id = req.params.id as string;
             const data = await RecordService.update(id, req.body);
@@ -33,7 +33,7 @@ export class RecordController {
         }
     }
 
-    static async remove(req: AuthRequest, res: Response, next: NextFunction) {
+    static async remove(req: Request, res: Response, next: NextFunction) {
         try {
             const id = req.params.id as string;
             await RecordService.softDelete(id);
@@ -43,7 +43,7 @@ export class RecordController {
         }
     }
 
-    static async getById(req: AuthRequest, res: Response, next: NextFunction) {
+    static async getById(req: Request, res: Response, next: NextFunction) {
         try {
             const id = req.params.id as string;
             const data = await RecordService.getById(id);
